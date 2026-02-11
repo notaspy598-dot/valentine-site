@@ -32,33 +32,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     musicBtn.addEventListener('click', toggleMusic);
 
-    // Only auto-play music if user came from the passcode page
-    music.volume = 0.5;
-    const urlParams = new URLSearchParams(window.location.search);
-    const unlocked = urlParams.get('unlocked') === 'true';
-
-    if (unlocked) {
-        const playPromise = music.play();
-        if (playPromise !== undefined) {
-            playPromise.then(_ => {
+    // Auto-play music immediately on page load
+    music.volume = 0.3;
+    const playPromise = music.play();
+    if (playPromise !== undefined) {
+        playPromise.then(_ => {
+            isPlaying = true;
+            musicIcon.textContent = 'music_note';
+            musicText.textContent = 'Pause Music';
+        }).catch(error => {
+            console.log("Autoplay blocked by browser. Will play on first interaction.");
+            musicIcon.textContent = 'music_off';
+            musicText.textContent = 'Play Music';
+            // Play on first user interaction anywhere on the page
+            const startMusicOnInteraction = () => {
+                music.play();
                 isPlaying = true;
                 musicIcon.textContent = 'music_note';
                 musicText.textContent = 'Pause Music';
-            }).catch(error => {
-                console.log("Autoplay prevented. Will play on first interaction.");
-                const startMusicOnInteraction = () => {
-                    music.play();
-                    isPlaying = true;
-                    musicIcon.textContent = 'music_note';
-                    musicText.textContent = 'Pause Music';
-                };
-                document.addEventListener('click', startMusicOnInteraction, { once: true });
-            });
-        }
-    } else {
-        // No auto-play — user can manually start via button
-        musicIcon.textContent = 'music_off';
-        musicText.textContent = 'Play Music';
+            };
+            document.addEventListener('click', startMusicOnInteraction, { once: true });
+        });
     }
 
     // --- Overlay / Reasons Carousel ---
@@ -131,4 +125,3 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
-
