@@ -68,8 +68,8 @@ document.addEventListener('DOMContentLoaded', () => {
         "Your kindness to everyone you meet.",
         "How safe I feel when I'm with you.",
         "Because you make me a better person.",
-        "The way you laugh at my silly jokes.",
-        "Your unwavering support in everything I do.",
+        "Because you gave me something ;) ❤.",
+        "Because you have the best heart",
         "The comfort of your hugs.",
         "How you always know how to cheer me up.",
         "I love you for exactly who you are."
@@ -131,3 +131,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
