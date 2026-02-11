@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>A Special Message Awaits...</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;family=Great+Vibes&amp;family=Playfair+Display:ital@0;1&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ee2b34",
+                        "error-soft": "#e57373",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#221011",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans"],
+                        "cursive": ["Great Vibes", "cursive"],
+                        "serif": ["Playfair Display", "serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    animation: {
+                        'shake': 'shake 0.5s cubic-bezier(.36,.07,.19,.97) both',
+                    },
+                    keyframes: {
+                        shake: {
+                            '10%, 90%': { transform: 'translate3d(-1px, 0, 0)' },
+                            '20%, 80%': { transform: 'translate3d(2px, 0, 0)' },
+                            '30%, 50%, 70%': { transform: 'translate3d(-4px, 0, 0)' },
+                            '40%, 60%': { transform: 'translate3d(4px, 0, 0)' },
+                        }
+                    }
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(238, 43, 52, 0.1);
+        }
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        .floating-delayed {
+            animation: float-delayed 8s ease-in-out infinite;
+        }
+        @keyframes float-delayed {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(-5deg); }
+        }
+        .shake-applied {
+            animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+        }
+    </style>
+</head>
+
+<body class="font-display bg-background-light min-h-screen flex items-center justify-center overflow-hidden">
+    <!-- Floating background elements -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <div class="absolute top-20 left-10 text-primary/10 floating">
+            <span class="material-icons text-7xl">favorite</span>
+        </div>
+        <div class="absolute bottom-40 right-20 text-primary/20 floating-delayed">
+            <span class="material-icons text-9xl">favorite</span>
+        </div>
+        <div class="absolute top-1/2 left-1/4 text-primary/5 floating">
+            <span class="material-icons text-5xl">favorite</span>
+        </div>
+        <div class="absolute top-1/3 right-1/3 text-primary/10 floating-delayed">
+            <span class="material-icons text-6xl">favorite</span>
+        </div>
+        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px]"></div>
+        <div class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px]"></div>
+    </div>
+
+    <main class="relative z-10 w-full max-w-md px-6">
+        <!-- Avatar with lock icon -->
+        <div class="flex justify-center mb-8">
+            <div class="relative">
+                <div class="absolute inset-0 bg-primary/20 rounded-full blur-xl scale-125"></div>
+                <img alt="Romantic heart decoration"
+                    class="w-24 h-24 rounded-full object-cover border-4 border-white shadow-xl relative z-10"
+                    src="assets/images/passcode-image.png" />
+                <div class="absolute -bottom-2 -right-2 bg-primary text-white p-2 rounded-full shadow-lg z-20">
+                    <span class="material-icons text-lg">lock</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main card -->
+        <div class="glass-effect rounded-xl p-8 md:p-10 shadow-2xl">
+            <div class="text-center mb-10">
+                <h1 class="font-cursive text-4xl md:text-5xl text-primary mb-3">
+                    A special message awaits you...
+                </h1>
+                <p class="text-primary/70 text-sm font-medium tracking-wide uppercase">
+                    THIS SPACE IS FOR OUR EYES ONLY
+                </p>
+            </div>
+
+            <form id="passcode-form" class="space-y-4" onsubmit="return false;">
+                <div class="space-y-2">
+                    <label class="sr-only" for="password">Secret Word</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            <span class="material-icons text-primary/40">key</span>
+                        </div>
+                        <input
+                            class="block w-full pl-12 pr-4 py-4 bg-white/50 border border-primary/20 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none text-gray-800 placeholder:text-gray-400"
+                            id="password" name="password" placeholder="The date it all started" type="password"
+                            autocomplete="off" />
+                    </div>
+                    <p id="error-msg"
+                        class="text-error-soft font-serif italic text-sm text-center animate-pulse hidden">
+                        Oops! That's not our secret word. Try again, love!
+                    </p>
+                </div>
+                <button id="unlock-btn"
+                    class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-lg shadow-lg shadow-primary/30 transition-all active:scale-[0.98] flex items-center justify-center gap-2 group"
+                    type="submit">
+                    <span>Unlock</span>
+                    <span class="material-icons group-hover:translate-x-1 transition-transform">favorite</span>
+                </button>
+            </form>
+
+            <!-- Hint -->
+            <div class="mt-8 text-center">
+                <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary/5 rounded-full">
+                    <span class="material-icons text-sm text-primary">lightbulb</span>
+                    <span class="text-sm text-primary/80 font-medium">Hint: The day it all started.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer decoration -->
+        <div class="mt-8 text-center flex items-center justify-center gap-4 text-primary/40">
+            <div class="h-[1px] w-12 bg-primary/20"></div>
+            <span class="material-icons text-xl">spa</span>
+            <div class="h-[1px] w-12 bg-primary/20"></div>
+        </div>
+        <p class="text-center mt-4 text-primary/40 text-xs font-semibold tracking-widest uppercase">
+            Made with love just for you
+        </p>
+    </main>
+
+    <script>
+        const form = document.getElementById('passcode-form');
+        const passwordInput = document.getElementById('password');
+        const errorMsg = document.getElementById('error-msg');
+        const unlockBtn = document.getElementById('unlock-btn');
+        const CORRECT_PASSCODE = '1812';
+
+        form.addEventListener('submit', handleSubmit);
+        unlockBtn.addEventListener('click', handleSubmit);
+
+        function handleSubmit(e) {
+            e.preventDefault();
+            const entered = passwordInput.value.trim();
+
+            if (entered === CORRECT_PASSCODE) {
+                // Success! Redirect to the card
+                unlockBtn.innerHTML = '<span class="material-icons animate-spin">favorite</span>';
+                unlockBtn.disabled = true;
+                setTimeout(() => {
+                    window.location.href = 'card.html?unlocked=true';
+                }, 600);
+            } else {
+                // Wrong password — show error + shake
+                errorMsg.classList.remove('hidden');
+                unlockBtn.classList.add('shake-applied');
+                passwordInput.classList.add('border-error-soft', 'ring-1', 'ring-error-soft');
+
+                setTimeout(() => {
+                    unlockBtn.classList.remove('shake-applied');
+                }, 500);
+
+                setTimeout(() => {
+                    passwordInput.classList.remove('border-error-soft', 'ring-1', 'ring-error-soft');
+                }, 2000);
+            }
+        }
+    </script>
+</body>
+
+</html>
