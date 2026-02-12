@@ -45,13 +45,17 @@ document.addEventListener('DOMContentLoaded', () => {
             musicIcon.textContent = 'music_off';
             musicText.textContent = 'Play Music';
             // Play on first user interaction anywhere on the page
-            const interactionEvents = ['click', 'mousemove', 'touchstart', 'keydown', 'scroll'];
+            // Only click, touchstart, and keydown count as user activation events for autoplay
+            const interactionEvents = ['click', 'touchstart', 'keydown'];
             const startMusicOnInteraction = () => {
-                music.play();
-                isPlaying = true;
-                musicIcon.textContent = 'music_note';
-                musicText.textContent = 'Pause Music';
-                // Remove all listeners once music starts
+                music.play().then(() => {
+                    isPlaying = true;
+                    musicIcon.textContent = 'music_note';
+                    musicText.textContent = 'Pause Music';
+                }).catch(e => {
+                    console.log("Still couldn't play music:", e);
+                });
+                // Remove all listeners once triggered
                 interactionEvents.forEach(evt => {
                     document.removeEventListener(evt, startMusicOnInteraction);
                 });
