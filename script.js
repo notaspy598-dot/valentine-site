@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     musicBtn.addEventListener('click', toggleMusic);
 
     // Auto-play music immediately on page load
-    music.volume = 0.3;
+    music.volume = 0.5;
     const playPromise = music.play();
     if (playPromise !== undefined) {
         playPromise.then(_ => {
@@ -45,13 +45,20 @@ document.addEventListener('DOMContentLoaded', () => {
             musicIcon.textContent = 'music_off';
             musicText.textContent = 'Play Music';
             // Play on first user interaction anywhere on the page
+            const interactionEvents = ['click', 'mousemove', 'touchstart', 'keydown', 'scroll'];
             const startMusicOnInteraction = () => {
                 music.play();
                 isPlaying = true;
                 musicIcon.textContent = 'music_note';
                 musicText.textContent = 'Pause Music';
+                // Remove all listeners once music starts
+                interactionEvents.forEach(evt => {
+                    document.removeEventListener(evt, startMusicOnInteraction);
+                });
             };
-            document.addEventListener('click', startMusicOnInteraction, { once: true });
+            interactionEvents.forEach(evt => {
+                document.addEventListener(evt, startMusicOnInteraction, { once: true });
+            });
         });
     }
 
