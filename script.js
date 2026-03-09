@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     musicBtn.addEventListener('click', toggleMusic);
 
     // Auto-play music immediately on page load
-    music.volume = 0.5;
+    music.volume = 0.2;
     const playPromise = music.play();
     if (playPromise !== undefined) {
         playPromise.then(_ => {
