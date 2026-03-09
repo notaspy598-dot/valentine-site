@@ -14,15 +14,20 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
         rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css">
     <script id="tailwind-config">
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        "primary": "#ee2b34",
-                        "error-soft": "#e57373",
-                        "background-light": "#f8f6f6",
-                        "background-dark": "#221011",
+                        "primary": "#DD2D4A",
+                        "primary-dark": "#880D1E",
+                        "accent": "#F26A8D",
+                        "error-soft": "#F26A8D",
+                        "background-light": "#faf7f8",
+                        "background-dark": "#880D1E",
+                        "rose-gold": "#F49CBB",
+                        "ice-blue": "#CBEEF3",
                     },
                     fontFamily: {
                         "display": ["Plus Jakarta Sans"],
@@ -54,7 +59,7 @@
         .glass-effect {
             background: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(238, 43, 52, 0.1);
+            border: 1px solid rgba(244, 156, 187, 0.2);
         }
         .floating {
             animation: float 6s ease-in-out infinite;
@@ -76,24 +81,36 @@
     </style>
 </head>
 
-<body class="font-display bg-background-light min-h-screen flex items-center justify-center overflow-hidden">
+<body class="font-display min-h-screen flex items-center justify-center overflow-hidden"
+    style="background: linear-gradient(135deg, #CBEEF3 0%, #faf7f8 35%, #fde8ef 65%, rgba(244,156,187,0.12) 100%);">
     <!-- Floating background elements -->
     <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-        <div class="absolute top-20 left-10 text-primary/10 floating">
+        <div class="absolute top-20 left-10 text-accent/15 floating">
             <span class="material-icons text-7xl">favorite</span>
         </div>
-        <div class="absolute bottom-40 right-20 text-primary/20 floating-delayed">
+        <div class="absolute bottom-40 right-20 text-rose-gold/20 floating-delayed">
             <span class="material-icons text-9xl">favorite</span>
         </div>
         <div class="absolute top-1/2 left-1/4 text-primary/5 floating">
             <span class="material-icons text-5xl">favorite</span>
         </div>
-        <div class="absolute top-1/3 right-1/3 text-primary/10 floating-delayed">
+        <div class="absolute top-1/3 right-1/3 text-accent/10 floating-delayed">
             <span class="material-icons text-6xl">favorite</span>
         </div>
-        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px]"></div>
-        <div class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px]"></div>
+        <!-- Extra scattered small hearts -->
+        <span class="material-icons floating-heart text-xs" style="top: 12%; left: 40%;">favorite</span>
+        <span class="material-icons floating-heart text-sm" style="top: 55%; right: 8%;">favorite</span>
+        <span class="material-icons floating-heart text-xs" style="top: 70%; left: 15%;">favorite</span>
+        <span class="material-icons floating-heart text-sm" style="top: 30%; right: 30%;">favorite</span>
+        <span class="material-icons floating-heart text-xs" style="bottom: 25%; left: 50%;">favorite</span>
+        <span class="material-icons floating-heart text-sm" style="top: 18%; left: 65%;">favorite</span>
+        <span class="material-icons floating-heart text-xs" style="bottom: 40%; right: 12%;">favorite</span>
+        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-ice-blue/20 rounded-full blur-[100px]"></div>
+        <div class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-rose-gold/10 rounded-full blur-[120px]"></div>
     </div>
+
+    <!-- Rising hearts from bottom -->
+    <div class="rising-hearts-container" id="rising-hearts"></div>
 
     <main class="relative z-10 w-full max-w-md px-6">
         <!-- Avatar with lock icon -->
@@ -202,7 +219,41 @@
             }
         }
     </script>
-</body>
 
+    <script>
+        // Rising hearts spawner
+        (function () {
+            const container = document.getElementById('rising-hearts');
+            if (!container) return;
+            const colors = [
+                'rgba(221,45,74,0.25)', 'rgba(242,106,141,0.22)',
+                'rgba(244,156,187,0.28)', 'rgba(136,13,30,0.18)',
+                'rgba(203,238,243,0.30)'
+            ];
+            function spawnHeart() {
+                const el = document.createElement('span');
+                el.classList.add('material-icons', 'rising-heart');
+                el.textContent = 'favorite';
+                const size = 10 + Math.random() * 18;
+                const left = Math.random() * 100;
+                const dur = 6 + Math.random() * 8;
+                const drift = (Math.random() - 0.5) * 80;
+                const spin = (Math.random() - 0.5) * 90;
+                el.style.cssText = `
+                    left:${left}%;
+                    font-size:${size}px;
+                    color:${colors[Math.floor(Math.random() * colors.length)]};
+                    animation-duration:${dur}s;
+                    --drift:${drift}px;
+                    --spin:${spin}deg;
+                `;
+                container.appendChild(el);
+                setTimeout(() => el.remove(), dur * 1000);
+            }
+            setInterval(spawnHeart, 800 + Math.random() * 800);
+            for (let i = 0; i < 5; i++) setTimeout(spawnHeart, i * 300);
+        })();
+    </script>
+</body>
 
 </html>
