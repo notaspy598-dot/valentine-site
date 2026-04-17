@@ -71,13 +71,13 @@ document.addEventListener('DOMContentLoaded', () => {
         "Your smile lights up my darkest days.",
         "The way you understand me without words.",
         "Your kindness to everyone you meet.",
-        "How safe I feel when I'm with you.",
-        "Because you make me a better person.",
+        "One text from you can turn the hour.",
+        "In a month, your hand has become my measure of warm.",
         "Because you gave me something ;) ❤.",
         "Because you have the best heart",
         "The comfort of your hugs.",
-        "How you always know how to cheer me up.",
-        "I love you for exactly who you are."
+        "Thirty days in, and you still surprise me every one of them.",
+        "This is only the first month. I am already keeping count."
     ];
 
     let currentReason = 0;

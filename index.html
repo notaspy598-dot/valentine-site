@@ -119,7 +119,7 @@
                 <div class="absolute inset-0 bg-primary/20 rounded-full blur-xl scale-125"></div>
                 <img alt="Romantic heart decoration"
                     class="w-24 h-24 rounded-full object-cover border-4 border-white shadow-xl relative z-10"
-                    src="assets/images/passcode-image.png" />
+                    src="assets/images/passcode.jpeg" />
                 <div class="absolute -bottom-2 -right-2 bg-primary text-white p-2 rounded-full shadow-lg z-20">
                     <span class="material-icons text-lg">lock</span>
                 </div>
@@ -146,7 +146,7 @@
                         </div>
                         <input
                             class="block w-full pl-12 pr-4 py-4 bg-white/50 border border-primary/20 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none text-gray-800 placeholder:text-gray-400"
-                            id="password" name="password" placeholder="The date it all started" type="password"
+                            id="password" name="password" placeholder="The day we FINALLY got together" type="password"
                             autocomplete="off" />
                     </div>
                     <p id="error-msg"
@@ -166,7 +166,7 @@
             <div class="mt-8 text-center">
                 <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary/5 rounded-full">
                     <span class="material-icons text-sm text-primary">lightbulb</span>
-                    <span class="text-sm text-primary/80 font-medium">Hint: The day it all started.</span>
+                    <span class="text-sm text-primary/80 font-medium">Hint: The day we FINALLY got together.</span>
                 </div>
             </div>
         </div>
@@ -187,7 +187,7 @@
         const passwordInput = document.getElementById('password');
         const errorMsg = document.getElementById('error-msg');
         const unlockBtn = document.getElementById('unlock-btn');
-        const CORRECT_PASSCODE = '1812';
+        const CORRECT_PASSCODE = '1803';
 
         form.addEventListener('submit', handleSubmit);
         unlockBtn.addEventListener('click', handleSubmit);
