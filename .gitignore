@@ -1,0 +1,5 @@
+# Original phone photos and video (too large / not web formats); the site uses the memory-*.jpeg copies.
+assets/images/IMG_*
+
+# Local design-tool working files (mockups, screenshots); not part of the site.
+.impeccable/
