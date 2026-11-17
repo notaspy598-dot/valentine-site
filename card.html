@@ -8,15 +8,18 @@
     <meta name="robots" content="noindex" />
     <meta property="og:title" content="For Ireti" />
     <meta property="og:description" content="A letter, just for you." />
-    <meta property="og:image" content="assets/images/photo.jpeg" />
+    <meta property="og:image" content="https://ireti-mi-corazon.vercel.app/assets/images/photo.jpeg" />
     <meta property="og:type" content="website" />
     <meta name="theme-color" content="#e3cbc6" />
     <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="apple-touch-icon" href="assets/images/icon-180.png">
+    <meta name="apple-mobile-web-app-title" content="For Ireti">
     <link rel="preload" href="assets/fonts/kaushan-script-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="styles.css">
     <script>
-        // Send anyone who skipped the passcode back to it.
-        try { if (!sessionStorage.getItem('unlocked')) location.replace('index.html'); } catch (e) { }
+        // Send anyone who hasn't unlocked it on this device back to the passcode.
+        try { if (!localStorage.getItem('unlocked')) location.replace('index.html'); } catch (e) { }
     </script>
     <script src="script.js" defer></script>
 </head>
@@ -42,7 +45,7 @@
                 <p>This isn't for a date on a calendar. It's for any day you need reminding: I choose you, and I'd choose you again.</p>
             </div>
 
-            <h2 class="hand trail-title">little moments</h2>
+            <h2 class="hand trail-title" id="moments">little moments</h2>
         </article>
 
         <svg class="thread-loop" viewBox="0 0 100 26" preserveAspectRatio="none" aria-hidden="true">
@@ -70,10 +73,25 @@
             </div>
         </section>
 
-        <footer class="closing">
+        <section class="open-when" aria-labelledby="open-when-title">
+            <h2 class="hand" id="open-when-title">open when…</h2>
+            <!-- Filled from the `openWhen` list in script.js -->
+            <div class="envelopes" id="envelopes"></div>
+        </section>
+
+        <footer class="closing" id="end">
             <p class="hand">come back whenever you need reminding.</p>
             <p class="sign">Yours, King Gem Gem</p>
-            <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" /></svg>
+            <button class="secret-heart" id="secret-heart" type="button" aria-label="A heart" aria-expanded="false" aria-controls="secret">
+                <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" /></svg>
+            </button>
+            <p class="secret" id="secret" aria-live="polite" hidden></p>
+            <p class="together" id="together"></p>
+            <!-- Shown once WHATSAPP is set in script.js -->
+            <a class="write-back" id="write-back" target="_blank" rel="noopener" hidden>
+                write back to me
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20h9" /><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" /></svg>
+            </a>
         </footer>
     </main>
 
@@ -86,6 +104,18 @@
             <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12" /></svg>
         </button>
     </dialog>
+
+    <!-- Jump between sections; a floating button because nothing sits above the name -->
+    <button class="jump" type="button" popovertarget="jump-menu" aria-label="Jump to a section">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" /></svg>
+    </button>
+    <nav class="jump-menu" id="jump-menu" popover aria-label="Sections">
+        <a href="#top">the letter</a>
+        <a href="#moments">little moments</a>
+        <a href="#reasons-title">why it's you</a>
+        <a href="#open-when-title">open when…</a>
+        <a href="#end">write back</a>
+    </nav>
 
     <button class="music" id="music-btn" type="button" aria-pressed="false" aria-label="Play music">
         <svg class="icon icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l12-2v13" /><circle cx="6" cy="18" r="3" /><circle cx="18" cy="16" r="3" /></svg>

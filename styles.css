@@ -182,10 +182,78 @@ svg.icon { width: 1.4rem; height: 1.4rem; fill: none; stroke: currentColor; stro
 .round-btn:hover { background: var(--crimson); color: var(--sheet); border-color: var(--crimson); }
 .round-btn:disabled { opacity: .35; cursor: default; background: var(--sheet); color: var(--crimson); }
 
+/* Open-when envelopes: tap one and its flap lifts and the note slides out */
+.open-when { margin-top: 4.5rem; text-align: center; }
+.open-when h2 { font-size: clamp(2.6rem, 11vw, 3.6rem); margin-bottom: 2.6rem; }
+.envelope { margin-bottom: 2rem; --tilt: -1.5deg; }
+.envelope:nth-child(even) { --tilt: 1.2deg; }
+.envelope summary {
+    position: relative;
+    list-style: none;
+    cursor: pointer;
+    min-height: 7rem;
+    display: grid;
+    align-items: end;
+    padding: 0 1rem .9rem;
+    background: url(assets/plates/sheet.png) repeat, var(--sheet);
+    box-shadow: var(--shadow-paper);
+    transform: rotate(var(--tilt));
+    transition: transform .25s var(--ease-out), box-shadow .25s var(--ease-out);
+    font: 600 1.6rem/1.1 var(--note);
+    color: var(--crimson);
+}
+.envelope summary::-webkit-details-marker { display: none; }
+.envelope summary::before { /* flap */
+    content: "";
+    position: absolute;
+    inset: 0 0 auto;
+    height: 58%;
+    background: #e5ddd0;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    transform-origin: top;
+    transition: transform .45s var(--ease-out);
+}
+.seal { position: absolute; top: calc(58% - 1rem); left: calc(50% - .8rem); width: 1.6rem; height: 1.6rem; color: var(--crimson); transition: opacity .2s; }
+@media (hover: hover) {
+    .envelope summary:hover { transform: rotate(0deg) scale(1.02); box-shadow: var(--shadow-lift); }
+}
+.envelope[open] { padding-top: 3.5rem; } /* room for the lifted flap */
+.envelope[open] summary::before { transform: rotateX(180deg); }
+.envelope[open] .seal { opacity: 0; }
+.envelope-note {
+    position: relative;
+    margin: -.4rem 5% 0;
+    padding: 1.25rem 1.25rem .25rem;
+    background: var(--blush);
+    box-shadow: var(--shadow-paper);
+    transform: rotate(calc(var(--tilt) * -1));
+    animation: note-out .5s var(--ease-out);
+}
+.envelope-note p { margin: 0 0 1rem; font-style: italic; text-align: left; }
+@keyframes note-out { from { transform: translateY(-2rem) rotate(0deg); opacity: 0; } }
+
 .closing { text-align: center; margin-top: 4.5rem; }
 .closing p { font-size: clamp(1.7rem, 7vw, 2.2rem); line-height: 1.25; margin: 0; }
 .closing .sign { font-size: clamp(1.7rem, 7vw, 2.1rem); margin-top: 2rem; }
-.closing svg { width: 2.4rem; height: 2.4rem; margin-top: .75rem; color: var(--crimson); }
+.secret-heart { display: inline-grid; place-items: center; width: 3rem; height: 3rem; margin-top: .5rem; padding: 0; border: 0; background: none; color: var(--crimson); cursor: pointer; }
+.secret-heart svg { width: 2.4rem; height: 2.4rem; }
+.secret-heart.beat { animation: beat .3s var(--ease-out); }
+@keyframes beat { 50% { transform: scale(1.25); } }
+.closing .secret { font: 400 clamp(1.4rem, 6vw, 1.7rem)/1.3 var(--hand); color: var(--crimson-deep); margin: 1rem auto 0; max-width: 24ch; animation: note-out .5s var(--ease-out); }
+.closing .together { font: 600 1.45rem/1.2 var(--note); color: var(--ink); margin-top: 1.25rem; }
+/* same look as the gate's "open it" button */
+.write-back:not([hidden]) {
+    display: inline-flex; align-items: center; gap: .5rem;
+    min-height: 3.2rem; margin-top: 2.5rem; padding: 0 1.5rem;
+    border-radius: .4rem;
+    font: 400 1.5rem/1 var(--hand);
+    background: var(--crimson); color: var(--sheet);
+    text-decoration: none;
+    box-shadow: 0 8px 18px -8px rgba(95, 36, 48, .55);
+    transition: background .2s, transform .1s;
+}
+.write-back:hover { background: var(--crimson-deep); }
+.write-back:active { transform: translateY(1px); }
 
 /* Music toggle */
 .music {
@@ -202,6 +270,31 @@ svg.icon { width: 1.4rem; height: 1.4rem; fill: none; stroke: currentColor; stro
 .music .icon-pause { display: none; }
 .music[aria-pressed="true"] .icon-play { display: none; }
 .music[aria-pressed="true"] .icon-pause { display: block; }
+
+/* Section menu: the music toggle's twin on the left, opening a taped note */
+html { scroll-behavior: smooth; }
+#moments, #reasons-title, #open-when-title, #end { scroll-margin-top: 2.5rem; }
+.jump {
+    position: fixed; left: 1rem; bottom: 1rem; z-index: 20;
+    width: 3.6rem; height: 3.6rem;
+    border: 0; border-radius: 50%;
+    display: grid; place-items: center;
+    background: var(--blush); color: var(--crimson);
+    box-shadow: var(--shadow-paper);
+    cursor: pointer;
+}
+.jump-menu {
+    inset: auto auto 5.6rem 1rem; margin: 0;
+    border: 0; overflow: visible;
+    padding: 1.6rem 1.75rem 1rem;
+    background: var(--blush);
+    box-shadow: var(--shadow-lift);
+    transform: rotate(-1.5deg);
+}
+.jump-menu:popover-open { display: grid; gap: .15rem; animation: print-in .3s var(--ease-out); }
+.jump-menu::before { content: ""; position: absolute; top: -.9rem; left: 50%; width: 46%; height: 1.9rem; transform: translateX(-50%) rotate(3deg); background: repeating-linear-gradient(-55deg, var(--tape-a) 0 .55rem, var(--tape-b) .55rem 1.1rem); opacity: .92; }
+.jump-menu a { font: 600 1.6rem/2.6rem var(--note); color: var(--crimson); text-decoration: none; }
+.jump-menu a:hover { color: var(--crimson-deep); text-decoration: underline; text-underline-offset: .2em; }
 
 /* ================= Passcode page ================= */
 .gate {
@@ -251,5 +344,6 @@ svg.icon { width: 1.4rem; height: 1.4rem; fill: none; stroke: currentColor; stro
 
 @media (prefers-reduced-motion: reduce) {
     *, *::before { animation: none !important; transition: none !important; }
+    html { scroll-behavior: auto; }
     .trail .photo.waiting { transform: rotate(var(--tilt)); opacity: 1; }
 }

@@ -35,6 +35,9 @@ Made by hand for one person: their own photos, their own reasons, their own pass
 - Memories timeline of photos with soft, undated captions. Do not invent dates or events.
 - "Reasons" carousel (10 reasons, see `script.js`).
 - Background music (`assets/music/song.mp3`) with a play/pause control.
+- The passcode is remembered per device (localStorage), so she only enters it once.
+- "Open when…" envelopes (`openWhen` in `script.js`), a "day N of us" counter from 18 March 2026, a reason that changes daily, and a secret note after five taps on the closing heart.
+- Installable to the home screen (`manifest.webmanifest`, `assets/images/icon-*.png`).
 
 ## Brand Commitments
 

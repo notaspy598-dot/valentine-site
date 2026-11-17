@@ -8,12 +8,20 @@
     <meta name="robots" content="noindex" />
     <meta property="og:title" content="For Ireti" />
     <meta property="og:description" content="A letter, just for you. Enter the passcode to open it." />
-    <meta property="og:image" content="assets/images/passcode.jpeg" />
+    <meta property="og:image" content="https://ireti-mi-corazon.vercel.app/assets/images/passcode.jpeg" />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://ireti-mi-corazon.vercel.app/" />
     <meta name="theme-color" content="#e3cbc6" />
     <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="apple-touch-icon" href="assets/images/icon-180.png">
+    <meta name="apple-mobile-web-app-title" content="For Ireti">
     <link rel="preload" href="assets/fonts/kaushan-script-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="styles.css">
+    <script>
+        // Already unlocked on this device: go straight to the letter.
+        try { if (localStorage.getItem('unlocked')) location.replace('card.html'); } catch (e) { }
+    </script>
 </head>
 
 <body>
@@ -52,7 +60,7 @@
         form.addEventListener('submit', (e) => {
             e.preventDefault();
             if (input.value.trim() === PASSCODE) {
-                try { sessionStorage.setItem('unlocked', '1'); } catch (err) { }
+                try { localStorage.setItem('unlocked', '1'); } catch (err) { }
                 location.href = 'card.html';
                 return;
             }
