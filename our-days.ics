@@ -1,0 +1,85 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//For Ireti//EN
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:monthly@ireti-mi-corazon
+DTSTAMP:20261117T000000Z
+DTSTART;VALUE=DATE:20261118
+RRULE:FREQ=MONTHLY;BYMONTH=1,2,4,5,6,7,8,9,10,11,12;BYMONTHDAY=18
+SUMMARY:Something is waiting for you ❤
+DESCRIPTION:Open your letter: https://ireti-mi-corazon.vercel.app/card.html
+URL:https://ireti-mi-corazon.vercel.app/card.html
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Something is waiting for you ❤
+TRIGGER:PT9H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:anniversary@ireti-mi-corazon
+DTSTAMP:20261117T000000Z
+DTSTART;VALUE=DATE:20270318
+RRULE:FREQ=YEARLY
+SUMMARY:Something is waiting for you ❤
+DESCRIPTION:Open your letter: https://ireti-mi-corazon.vercel.app/card.html
+URL:https://ireti-mi-corazon.vercel.app/card.html
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Something is waiting for you ❤
+TRIGGER:PT9H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:day-250@ireti-mi-corazon
+DTSTAMP:20261117T000000Z
+DTSTART;VALUE=DATE:20261122
+SUMMARY:Something is waiting for you ❤
+DESCRIPTION:Open your letter: https://ireti-mi-corazon.vercel.app/card.html
+URL:https://ireti-mi-corazon.vercel.app/card.html
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Something is waiting for you ❤
+TRIGGER:PT9H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:day-300@ireti-mi-corazon
+DTSTAMP:20261117T000000Z
+DTSTART;VALUE=DATE:20270111
+SUMMARY:Something is waiting for you ❤
+DESCRIPTION:Open your letter: https://ireti-mi-corazon.vercel.app/card.html
+URL:https://ireti-mi-corazon.vercel.app/card.html
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Something is waiting for you ❤
+TRIGGER:PT9H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:day-500@ireti-mi-corazon
+DTSTAMP:20261117T000000Z
+DTSTART;VALUE=DATE:20270730
+SUMMARY:Something is waiting for you ❤
+DESCRIPTION:Open your letter: https://ireti-mi-corazon.vercel.app/card.html
+URL:https://ireti-mi-corazon.vercel.app/card.html
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Something is waiting for you ❤
+TRIGGER:PT9H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:day-1000@ireti-mi-corazon
+DTSTAMP:20261117T000000Z
+DTSTART;VALUE=DATE:20281211
+SUMMARY:Something is waiting for you ❤
+DESCRIPTION:Open your letter: https://ireti-mi-corazon.vercel.app/card.html
+URL:https://ireti-mi-corazon.vercel.app/card.html
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Something is waiting for you ❤
+TRIGGER:PT9H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

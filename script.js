@@ -42,6 +42,30 @@ const secret = "You found it. The secret is there's no secret: I'm just complete
 
 const together = Date.UTC(2026, 2, 18); // 18 March 2026, the day we finally got together
 
+// A note at the top of the letter, shown only on that day (same count as "day N of us").
+// Drafts: rewrite them in your own words, and add any day you like.
+// shortcut: the day numbers are repeated as dates in our-days.ics (her calendar reminders); add a new day there too.
+const milestones = {
+    250: "Day 250. Two hundred and fifty days of you, and I'd pick every one of them again.",
+    300: 'Day 300. Three hundred days in, and you still make my heart do the thing.',
+    500: "Day 500. Five hundred days, and I'm not tired of you. Not even a little.",
+    1000: "Day 1000. A thousand days of us. Here's to the next thousand.",
+};
+// Every 18 March from 2027 on; this wins over everything else on that date.
+const anniversary = (years) => years === 1
+    ? 'Happy anniversary, my love. One year since we finally got together, and the best one I\'ve had.'
+    : `Happy anniversary, my love. ${years} years of us, and I'd choose you all over again.`;
+// The 18th of every other month. A day number above wins if it lands on the same date.
+const monthly = (months) => `Happy ${months} months, my love. I'd choose you again for every single one.`;
+
+// Day 1 is the day we got together, counted by her local calendar date.
+const dayOf = (d) => Math.floor((Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) - together) / 864e5) + 1;
+const milestoneFor = (d) => {
+    const months = (d.getFullYear() - 2026) * 12 + d.getMonth() - 2;
+    if (d.getDate() === 18 && months > 0 && months % 12 === 0) return anniversary(months / 12);
+    return milestones[dayOf(d)] ?? (d.getDate() === 18 && months > 0 ? monthly(months) : undefined);
+};
+
 // "Write back to me" opens a WhatsApp chat with you. Your number in international format,
 // digits only, no + or spaces (e.g. '2348012345678'). Leave it empty to hide the button.
 const WHATSAPP = '2348143796340';
@@ -116,11 +140,17 @@ document.addEventListener('DOMContentLoaded', () => {
     prev.addEventListener('click', () => i > 0 && show(i - 1, -1));
     next.addEventListener('click', () => i < reasons.length - 1 && show(i + 1, 1));
 
-    // Days since we got together, counted by her local calendar date.
     const now = new Date();
-    const days = Math.floor((Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) - together) / 864e5);
-    document.getElementById('together').textContent = `day ${days + 1} of us`;
-    show(days % reasons.length); // a different reason greets her each day
+    const day = dayOf(now);
+    document.getElementById('together').textContent = `day ${day} of us`;
+    show((day - 1) % reasons.length); // a different reason greets her each day
+
+    const note = milestoneFor(now);
+    if (note) {
+        const el = document.getElementById('milestone');
+        el.textContent = note;
+        el.hidden = false;
+    }
 
     // Open-when envelopes: native <details>, so they open without script too.
     document.getElementById('envelopes').innerHTML = openWhen.map(e => `

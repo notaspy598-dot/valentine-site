@@ -38,6 +38,9 @@
                 <h1 class="hand name">Ireti</h1>
             </header>
 
+            <!-- Shown only on milestone days; set in `milestones` in script.js -->
+            <p class="milestone" id="milestone" hidden></p>
+
             <!-- The letter: edit the words freely, keep each paragraph in its own <p>. -->
             <div class="letter">
                 <p>I wanted somewhere to keep the things I don't always say out loud, so I made you this.</p>
@@ -87,6 +90,8 @@
             </button>
             <p class="secret" id="secret" aria-live="polite" hidden></p>
             <p class="together" id="together"></p>
+            <!-- Her calendar reminds her on our days; the dates live in our-days.ics -->
+            <a class="remind" href="our-days.ics">remind me on our days</a>
             <!-- Shown once WHATSAPP is set in script.js -->
             <a class="write-back" id="write-back" target="_blank" rel="noopener" hidden>
                 write back to me
